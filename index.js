@@ -49,15 +49,15 @@ app.get('/api/token/:token_id', function (req, res) {
         }
     })
     tokenPromise.then(it => {
-        it.image = "https://super-song.herokuapp.com/api/image/" + tokenId
-        it.name = it.title
-        if( it.spotify_uri.split(":").length() >=2)
-            it.external_url = "https://open.spotify.com/track/" + it.spotify_uri.split(":")[2]
-        else
-            it.external_url = "https://google.com"
-        // https://open.spotify.com/track/6Ej19hoMH8BR50RRJjNLfn?si=-vr9SNMoTreVR2TijWx2kw
-        //spotify:track:6Ej19hoMH8BR50RRJjNLfn
-        res.status(200).send(it)
+            it.image = "https://super-song.herokuapp.com/api/image/" + tokenId
+            it.name = it.title
+            if (it.spotify_uri.split(":").length() >= 2)
+                it.external_url = "https://open.spotify.com/track/" + it.spotify_uri.split(":")[2]
+            else
+                it.external_url = "https://google.com"
+            // https://open.spotify.com/track/6Ej19hoMH8BR50RRJjNLfn?si=-vr9SNMoTreVR2TijWx2kw
+            //spotify:track:6Ej19hoMH8BR50RRJjNLfn
+            res.status(200).send(it)
         }
     )
 })
@@ -81,7 +81,7 @@ app.get('/api/image/:token_id', function (req, res) {
     })
     tokenPromise.then(it => {
         const img = Buffer.from(it.image
-            .replace(/^data:image\/(png|jpeg|jpg);base64,/, ''),
+                .replace(/^data:image\/(png|jpeg|jpg);base64,/, ''),
             'base64');
         res.writeHead(200, {
             'Content-Type': 'image/png',
@@ -93,6 +93,16 @@ app.get('/api/image/:token_id', function (req, res) {
     })
 })
 
+app.get('/contract', function (req, res) {
+    const result = {
+        'name': 'Spotify Supersong',
+        'description': 'Top song of the artist, signed',
+        'image': 'https://logos-world.net/wp-content/uploads/2020/09/Spotify-Logo.png',
+        'external_link': 'https://spotify.com'
+    }
+
+    res.status(200).send(result)
+})
 
 async function createToken(req) {
     // ... you will write your Prisma Client queries here
