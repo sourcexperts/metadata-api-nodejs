@@ -97,7 +97,7 @@ app.get('/contract', function (req, res) {
     const result = {
         'name': 'Spotify Supersong',
         'description': 'Top song of the artist, signed',
-        'image': 'https://logos-world.net/wp-content/uploads/2020/09/Spotify-Logo.png',
+        'image': 'https://pyxis.nymag.com/v1/imgs/2b7/b66/dc2752664adfba3b8523d73873c5bf8034-26-spotify.rsquare.w330.jpg',
         'external_link': 'https://spotify.com'
     }
 
