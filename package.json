@@ -10,11 +10,15 @@
   "author": "Alex Atallah <alex.atallah@opensea.io>",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^2.18.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "moment": "^2.22.2"
   },
   "devDependencies": {
+    "prisma": "^2.18.0",
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
