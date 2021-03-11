@@ -50,7 +50,7 @@ app.get('/api/token/:token_id', function (req, res) {
 
 app.post('/api/token', function (req, res) {
 
-
+    console.log("post req", req )
     const createdToken = createToken(req.body)
     createdToken.then(it => res.send(it))
 
