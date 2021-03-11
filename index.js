@@ -38,6 +38,7 @@ app.get('/', function (req, res) {
 })
 
 
+//metadata
 //get token by id
 app.get('/api/token/:token_id', function (req, res) {
 
@@ -47,7 +48,11 @@ app.get('/api/token/:token_id', function (req, res) {
             id: tokenId
         }
     })
-    tokenPromise.then(it => res. res.status(200).send(it))
+    tokenPromise.then(it => {
+            it.image = "https://super-song.herokuapp.com/api/image/" + tokenId
+        res.status(200).send(it)
+        }
+    )
 })
 
 app.post('/api/token', function (req, res) {
@@ -60,14 +65,25 @@ app.post('/api/token', function (req, res) {
 
 })
 
-app.get('/image/:token_id', function (req, res) {
+app.get('/api/image/:token_id', function (req, res) {
     const tokenId = parseInt(req.params.token_id)
     const tokenPromise = prisma.token.findFirst({
         where: {
             id: tokenId
         }
     })
-    tokenPromise.then(it => res. res.status(200).send(it.image))
+    tokenPromise.then(it => {
+        const img = Buffer.from(it.image
+            .replace(/^data:image\/(png|jpeg|jpg);base64,/, ''),
+            'base64');
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': img.length
+        });
+        res.end(img);
+
+
+    })
 })
 
 
