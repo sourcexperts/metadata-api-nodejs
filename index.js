@@ -21,7 +21,9 @@ const app = express()
     .set('view engine', 'ejs')
 app.use(cors())
 app.options('*', cors())
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb', extended: true}))
+
+
 // Static public files
 app.use(express.static(path.join(__dirname, 'public')))
 
