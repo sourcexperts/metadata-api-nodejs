@@ -20,6 +20,7 @@ const app = express()
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'ejs')
 app.use(cors())
+app.options('*', cors())
 app.use(bodyParser.json())
 // Static public files
 app.use(express.static(path.join(__dirname, 'public')))
