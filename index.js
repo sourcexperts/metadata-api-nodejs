@@ -51,7 +51,7 @@ app.get('/api/token/:token_id', function (req, res) {
     tokenPromise.then(it => {
             it.image = "https://super-song.herokuapp.com/api/image/" + tokenId
             it.name = it.title
-            if (it.spotify_uri.split(":").length() >= 2)
+            if (it.spotify_uri.split(":").length >= 2)
                 it.external_url = "https://open.spotify.com/track/" + it.spotify_uri.split(":")[2]
             else
                 it.external_url = "https://google.com"
