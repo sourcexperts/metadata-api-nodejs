@@ -24,11 +24,23 @@ app.use(bodyParser.json())
 // Static public files
 app.use(express.static(path.join(__dirname, 'public')))
 
+
+app.use(function(req, res, next) {
+    res.setHeader("Content-Security-Policy", "default-src *");
+    return next();
+});
+
 app.get('/', function (req, res) {
     res.send('Get ready for OpenSea!');
 })
+
+
+
 //get token by id
 app.get('/api/token/:token_id', function (req, res) {
+
+
+
     const tokenId = parseInt(req.params.token_id)
     const tokenPromise = prisma.token.findFirst({
         where: {
@@ -39,6 +51,7 @@ app.get('/api/token/:token_id', function (req, res) {
 })
 
 app.post('/api/token', function (req, res) {
+
 
     const createdToken = createToken(req.body)
     createdToken.then(it => res.send(it))
