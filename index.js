@@ -28,7 +28,7 @@ app.use(bodyParser.json({limit: '50mb', extended: true}))
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader("Content-Security-Policy", "default-src *");
     return next();
 });
@@ -36,7 +36,6 @@ app.use(function(req, res, next) {
 app.get('/', function (req, res) {
     res.send('Get ready for OpenSea!');
 })
-
 
 
 //get token by id
@@ -48,14 +47,16 @@ app.get('/api/token/:token_id', function (req, res) {
             id: tokenId
         }
     })
-    tokenPromise.then(it => res.send(it))
+    tokenPromise.then(it => res. res.status(200).send(it))
 })
 
 app.post('/api/token', function (req, res) {
 
-    console.log("post req", req )
     const createdToken = createToken(req.body)
-    createdToken.then(it => res.send(it))
+    createdToken.then(it => {
+        res.status(200).send(it)
+
+    })
 
 })
 
@@ -66,16 +67,15 @@ app.get('/image/:token_id', function (req, res) {
             id: tokenId
         }
     })
-    tokenPromise.then(it => res.send(it.image))
+    tokenPromise.then(it => res. res.status(200).send(it.image))
 })
 
 
 async function createToken(req) {
-    console.log(req)
     // ... you will write your Prisma Client queries here
-    return prisma.token.create({
+    return await prisma.token.create({
         data: {
-            id: req.token_id,
+            // id: req.token_id,
             title: req.title,
             artist: req.artist,
             spotify_uri: req.spotify_uri,
