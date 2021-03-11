@@ -39,8 +39,6 @@ app.get('/', function (req, res) {
 //get token by id
 app.get('/api/token/:token_id', function (req, res) {
 
-
-
     const tokenId = parseInt(req.params.token_id)
     const tokenPromise = prisma.token.findFirst({
         where: {
@@ -56,6 +54,16 @@ app.post('/api/token', function (req, res) {
     const createdToken = createToken(req.body)
     createdToken.then(it => res.send(it))
 
+})
+
+app.get('/image/:token_id', function (req, res) {
+    const tokenId = parseInt(req.params.token_id)
+    const tokenPromise = prisma.token.findFirst({
+        where: {
+            id: tokenId
+        }
+    })
+    tokenPromise.then(it => res.send(it.image))
 })
 
 
